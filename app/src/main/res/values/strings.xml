@@ -7,4 +7,8 @@
     <string name="reading">Reading</string>
     <string name="speaking">Speaking</string>
     <string name="todo">TODO</string>
+    <string name="login">Login:</string>
+    <string name="hint">hint</string>
+    <string name="senha">Senha:</string>
+    <string name="login2">Login</string>
 </resources>
