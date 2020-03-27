@@ -22,6 +22,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:gravity="center_horizontal"
         android:text="Notificações"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -38,11 +39,11 @@
         android:layout_marginLeft="32dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toStartOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView6"
-        app:srcCompat="@drawable/ic_notifications_black_24dp"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/ic_notifications_black_24dp" />
 
     <ImageView
         android:id="@+id/imageView2"
