@@ -39,6 +39,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
     }
 
     public void onClick(View view){
-        Toast.makeText(getActivity(), "Test", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "Enviado com sucesso!!", Toast.LENGTH_LONG).show();
     }
 }

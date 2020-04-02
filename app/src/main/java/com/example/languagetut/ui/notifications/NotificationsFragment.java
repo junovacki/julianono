@@ -1,10 +1,14 @@
 package com.example.languagetut.ui.notifications;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -14,9 +18,10 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.languagetut.R;
 
-public class NotificationsFragment extends Fragment {
+public class NotificationsFragment extends Fragment implements View.OnClickListener{
 
     private NotificationsViewModel notificationsViewModel;
+    private Button button;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +35,13 @@ public class NotificationsFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        button = root.findViewById(R.id.button3);
+        button.setOnClickListener(this);
         return root;
     }
+
+    public void onClick(View view){
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/playlist?list=PLWtJjspkv97KyyTvh0nlzl0vAZuWsXczw")));
+    }
+
 }
