@@ -100,5 +100,6 @@
                 android:layout_height="34dp"
                 android:text="Enviar" />
         </RadioGroup>
+        <include layout="@layout/toolbar_layout"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
