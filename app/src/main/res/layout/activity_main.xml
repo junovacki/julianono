@@ -21,6 +21,16 @@
         app:layout_constraintVertical_bias="1.0"
         app:navGraph="@navigation/mobile_navigation" />
 
+    <fragment
+        android:id="@+id/toolbar"
+        android:name="com.example.languagetut.BlankFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_toolbar" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"
@@ -30,5 +40,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
-    <include layout="@layout/toolbar_layout"/>
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/fragment_toolbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

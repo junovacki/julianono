@@ -135,7 +135,7 @@
             android:progress="50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-        <include layout="@layout/toolbar_layout"/>
+        <include layout="@layout/fragment_toolbar"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
