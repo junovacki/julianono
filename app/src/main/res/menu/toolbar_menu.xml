@@ -2,9 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/sair"
+    <item
+        android:id="@+id/perguntas"
+        android:title="Cadastro de perguntas" />
+    <item
+        android:id="@+id/usuario"
+        android:title="Cadastro de usuario" />
+    <item
+        android:id="@+id/sair"
         android:title="Sair"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
 
 </menu>

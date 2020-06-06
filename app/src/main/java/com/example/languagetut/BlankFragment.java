@@ -1,56 +1,59 @@
 package com.example.languagetut;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Toast;
-
-import android.view.View;
-import android.view.ViewGroup;
+import com.example.languagetut.cadastro.CadastroPerguntasActivity;
+import com.example.languagetut.cadastro.CadastroUsuarioActivity;
 
 import java.util.Objects;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class BlankFragment extends Fragment {
 
     public BlankFragment() {
-        // Required empty public constructor
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater menuInflater) {
         menuInflater.inflate(R.menu.toolbar_menu, menu);
-        return;
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_toolbar, container, false);
     }
 
-//    public boolean onOptionsMenu(Menu menu){
-//        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-//        return true;
-//
-//    }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Toast.makeText(requireContext().getApplicationContext(),  "Deslogado", Toast.LENGTH_SHORT).show();
+        switch (item.getItemId()){
+            case R.id.perguntas:
+                Intent intentPerguntas = new Intent(getActivity(), CadastroPerguntasActivity.class);
+                startActivity(intentPerguntas);
+                break;
+            case R.id.usuario:
+                Intent intentUsuario = new Intent(getActivity(), CadastroUsuarioActivity.class);
+                startActivity(intentUsuario);
+                break;
+            case R.id.sair:
+                Objects.requireNonNull(getActivity()).finish();
+                System.exit(0);
+                break;
+            default:
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 }
