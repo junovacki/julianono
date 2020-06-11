@@ -4,17 +4,18 @@ import java.io.Serializable;
 import java.util.Set;
 
 public class User implements Serializable {
-    private int user_id;
+
+    private static int user_id;
     private String name;
     private int age;
     private int level;
 
-    public int getUser_id() {
+    public static int getUser_id() {
         return user_id;
     }
 
     public void setUser_id(int user_id) {
-        this.user_id = user_id;
+        User.user_id = user_id;
     }
 
     public String getName() {

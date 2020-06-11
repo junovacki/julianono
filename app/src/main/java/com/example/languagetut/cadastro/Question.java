@@ -3,11 +3,12 @@ package com.example.languagetut.cadastro;
 import java.io.Serializable;
 
 public class Question implements Serializable {
-    private int question_id;
+    private static int question_id;
+
     private int level_required;
     private String question_text;
 
-    public int getQuestion_id() {
+    public static int getQuestion_id() {
         return question_id;
     }
 

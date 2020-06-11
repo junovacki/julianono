@@ -65,4 +65,26 @@ public class DAO {
         }
         return user;
     }
+    public long updateQuestion(Question question){
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(levelRequired, question.getLevel_required());
+        contentValues.put(questionText, question.getQuestion_text());
+        return db.update(tableQuestion, contentValues, "question_id = ?", new String[]{String.valueOf(Question.getQuestion_id())} );
+
+
+    }
+    public void removerQuestion(int id){
+        db.delete(tableQuestion, "question_id = ?", new String[]{String.valueOf(id)});
+    }
+    public long updateUser(User user){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(name, user.getName());
+        contentValues.put(age, user.getAge());
+        contentValues.put(level, user.getLevel());
+        return db.update(tableUser, contentValues, "user_id = ?", new String[]{String.valueOf(User.getUser_id())} );
+    }
+    public void removerUser(int id){
+        db.delete(tableUser, "user_id = ?", new String[]{String.valueOf(id)});
+    }
 }

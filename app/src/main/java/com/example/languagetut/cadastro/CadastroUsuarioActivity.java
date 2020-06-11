@@ -17,6 +17,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private EditText editId;
     private Button salvar;
     private Button consultar;
+    private Button atualizar;
+    private Button excluir;
     private TextView viewId;
     private TextView viewNome;
     private TextView viewIdade;
@@ -38,28 +40,80 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         viewNivel = findViewById(R.id.txtViewNivel2);
         salvar = findViewById(R.id.btnSalvar2);
         consultar = findViewById(R.id.btnConsultar2);
+        atualizar = findViewById(R.id.btnAtualizar2);
+        excluir = findViewById(R.id.btnExcluir2);
         conexaoDB = new ConexaoDB(this);
         dao = new DAO();
         dao.setConexaoDB(conexaoDB);
         salvar.setOnClickListener((v) -> {insert();});
-        consultar.setOnClickListener((v) -> {select(Integer.parseInt(editId.getText().toString()));});
+        consultar.setOnClickListener((v) -> {
+            try {
+                select(Integer.parseInt(editId.getText().toString()));
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        atualizar.setOnClickListener((v) -> {update();});
+        excluir.setOnClickListener((v) -> {
+            try {
+                remover(Integer.parseInt(editId.getText().toString()));
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 
     private void insert() {
-        User user = new User();
-        user.setName(nome.getText().toString());
-        user.setAge(Integer.parseInt(idade.getText().toString()));
-        user.setLevel(Integer.parseInt(nivel.getText().toString()));
-        long id = dao.insertUser(user);
-        Toast.makeText(this, "Usuário com id: " + id, Toast.LENGTH_LONG).show();
+        try {
+            User user = new User();
+            user.setName(nome.getText().toString());
+            user.setAge(Integer.parseInt(idade.getText().toString()));
+            user.setLevel(Integer.parseInt(nivel.getText().toString()));
+            long id = dao.insertUser(user);
+            Toast.makeText(this, "Usuário com id: " + id, Toast.LENGTH_LONG).show();
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void select(int id){
-        User user = dao.selectUser(id);
-        viewId.setText("ID: " + id);
-        viewNome.setText("Nome: " + user.getName());
-        viewIdade.setText("Idade: " + user.getAge());
-        viewNivel.setText("Nível: " + user.getLevel());
+        try {
+            User user = dao.selectUser(id);
+            if(user.getName() != null || user.getAge() != 0 || user.getLevel() != 0) {
+                viewId.setText("ID: " + id);
+                viewNome.setText("Nome: " + user.getName());
+                viewIdade.setText("Idade: " + user.getAge());
+                viewNivel.setText("Nível: " + user.getLevel());
+            } else {
+                Toast.makeText(this, "Registro com id " + id + " está vazio!", Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+    private void update() {
+        try {
+            if (Integer.parseInt(editId.getText().toString()) > 0) {
+                User user = new User();
+                user.setUser_id(Integer.parseInt(editId.getText().toString()));
+                user.setName(nome.getText().toString());
+                user.setAge(Integer.parseInt(idade.getText().toString()));
+                user.setLevel(Integer.parseInt(nivel.getText().toString()));
+                dao.updateUser(user);
+                Toast.makeText(this, "Usuário com id: " + User.getUser_id() + " foi atualizado", Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+    public void remover(int id){
+        try {
+            dao.removerUser(id);
+            Toast.makeText(this, "User removido com sucesso!", Toast.LENGTH_LONG).show();
+
+        } catch (Exception e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 }

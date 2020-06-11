@@ -18,6 +18,8 @@ public class CadastroPerguntasActivity extends AppCompatActivity {
     private TextView viewPergunta;
     private Button salvar;
     private Button consultar;
+    private Button atualizar;
+    private Button excluir;
     private DAO dao;
     private ConexaoDB conexaoDB;
 
@@ -30,6 +32,8 @@ public class CadastroPerguntasActivity extends AppCompatActivity {
         questionId = findViewById(R.id.editId);
         salvar = findViewById(R.id.btnSalvar);
         consultar = findViewById(R.id.btnConsultar);
+        atualizar = findViewById(R.id.btnAtualizar2);
+        excluir = findViewById(R.id.btnExcluir2);
         viewId = findViewById(R.id.txtViewID);
         viewNivel = findViewById(R.id.txtViewNivel);
         viewPergunta = findViewById(R.id.txtViewPergunta);
@@ -39,6 +43,9 @@ public class CadastroPerguntasActivity extends AppCompatActivity {
         salvar.setOnClickListener((v) -> {insert();});
         consultar.setOnClickListener((v) -> {int id = Integer.parseInt(questionId.getText().toString());
                                                 select(id);});
+        atualizar.setOnClickListener((v) -> {atualizar();});
+        excluir.setOnClickListener((v) -> {int id = Integer.parseInt(questionId.getText().toString());
+            remover(id);});
     }
 
     private void insert() {
@@ -46,7 +53,7 @@ public class CadastroPerguntasActivity extends AppCompatActivity {
         question.setLevel_required(Integer.parseInt(nivelRequirido.getText().toString()));
         question.setQuestion_text(textoPergunta.getText().toString());
         long id = dao.insertQuestion(question);
-        Toast.makeText(this, "Questão com id: " + id, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Questão com id: " + id , Toast.LENGTH_LONG).show();
     }
 
     private void select(int id){
@@ -55,4 +62,26 @@ public class CadastroPerguntasActivity extends AppCompatActivity {
         viewNivel.setText("Nível requerido: " + question.getLevel_required());
         viewPergunta.setText("Questão: " + question.getQuestion_text());
     }
+    private void atualizar() {
+        try {
+            Question question = new Question();
+            question.setLevel_required(Integer.parseInt(nivelRequirido.getText().toString()));
+            question.setQuestion_text(textoPergunta.getText().toString());
+            long id = dao.updateQuestion(question);
+            Toast.makeText(this, "Questão com id: " + id +" foi atualizada", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+}
+    public void remover(int id){
+        try {
+            dao.removerQuestion(id);
+            Toast.makeText(this, "Question removida com sucesso!", Toast.LENGTH_LONG).show();
+
+        } catch (Exception e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
 }
